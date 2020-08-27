@@ -11,22 +11,22 @@
     <h1>정렬 시각화해보기</h1>
     <div class="input-container">
       <input
-        id="numbers"
+        id="input-numbers"
         class = "input"
         placeholder="숫자를 콤마(,) 단위로 입력해주세요"
       >
       <div id="dropdown" class="dropdown">
-        <button id="drop-button" class="drop-button" onclick="showSorts()">정렬선택</button>
+        <button id="drop-button" class="drop-button" onclick="selectSortType()">정렬선택</button>
         <div id="dropdown-contents" class="dropdown-contents">      
-          <button class="dropdown-content" type="button" onclick="selectSort()">선택정렬</button>
-          <button class="dropdown-content" type="button" onclick="bubbleSort()">버블정렬</button>
-          <button class="dropdown-content" type="button" onclick="insertionSort()">삽입정렬</button>
-          <button class="dropdown-content" type="button" onclick="mergeSort()">합병정렬</button>
+          <button class="dropdown-content" type="button" onclick="startSort(1)">선택정렬</button>
+          <button class="dropdown-content" type="button" onclick="startSort(2)">버블정렬</button>
+          <button class="dropdown-content" type="button" onclick="startSort(3)">삽입정렬</button>
+          <button class="dropdown-content" type="button" onclick="startSort(4)">합병정렬</button>
         </div>
       </div>
     </div>
   </div>
-  <div id="circles"></div>
+  <div id="numbers"></div>
   <script src="index.js"></script>
 </body>
 </html>

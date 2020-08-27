@@ -41,14 +41,14 @@
 
 .show {display: block;}
 
-#circles{
+.numbers-list{
   display: flex;
   margin-top: 3em;
   margin-left: 10%;
   margin-right: 10%;
 }
 
-.circle{
+.number{
   display: inline-block;
   background-color: aquamarine;
   width: 10em;
@@ -57,5 +57,5 @@
   text-align: center;
   font-weight: bolder;
   padding-top: 120px;
-  padding-right: 200px;
+  /* padding-right: 200px; */
 }
