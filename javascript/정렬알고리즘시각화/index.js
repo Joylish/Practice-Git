@@ -45,8 +45,6 @@ const showNumbers = () => {
 const swapElement = (e1, e2) =>{
   const temp = document.createElement('li');
   temp.className = "number";
-  
-
 }
 
 const selectSort = () =>{
