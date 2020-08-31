@@ -29,7 +29,7 @@ public class PersonEntity {
 	// 처리 로직은 set method에서
 	public void setSsn(String ssn) {
 		this.ssn = ssn;
-		if (ssn.charAt(6)=='1'||ssn.charAt(6)=='3') gender = '남' ;
+		if (ssn.charAt(6)=='1'||ssn.charAt(6)=='3') gender = '남';
 		if (ssn.charAt(6)=='2'||ssn.charAt(6)=='4') gender = '여' ;
 	}
 
@@ -38,7 +38,12 @@ public class PersonEntity {
 	}
 
 	public void setGender(char gender) {
-		this.gender = gender;
+		if(gender=='여'||gender=='남') {
+			this.gender = gender;
+		}
+		else {
+			System.out.println("유효하지 않은 값입니다.");
+		}
 	}
 
 	public String getAddress() {

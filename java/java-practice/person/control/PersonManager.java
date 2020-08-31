@@ -40,17 +40,18 @@ public class PersonManager {
 				System.out.println(
 						"[이름] "+
 						person.getName() +
-						"\t[성별] "+
+						"\n[성별] "+
 						person.getGender()+
-						"\t\t[전화번호] "+
+						"\n[전화번호] "+
 						person.getPhone()+
-						"\t[주소] "+
+						"\n[주소] "+
 						person.getAddress()
 						);
 				break;
 			}
 		}
 	}
+	
 	int findByPerson(PersonEntity[] persons, char gender) {
 		int cnt = 0;
 		for(PersonEntity person:persons) {
@@ -75,6 +76,7 @@ public class PersonManager {
 	public static void main(String[] args) {
 		PersonManager pManager = new PersonManager();
 		PersonEntity[] persons = new PersonEntity[10];
+		
 		pManager.fillPersons(persons);
 		
 		pManager.printTitle("@@@ 인물 정보 조회 시스템 @@@");
