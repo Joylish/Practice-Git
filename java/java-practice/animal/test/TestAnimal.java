@@ -16,24 +16,33 @@ public class TestAnimal {
 		Pet p = new Cat();
 		
 		System.out.println("=".repeat(60));
-		System.out.println("[고양이] c");
-		System.out.println("[이름] "+ c.getName());
+		System.out.println("나는 고양이");
+		System.out.println("고양이 c 이름: "+ c.getName());
+		c.play();
+		c.eat();
 		c.walk();
 		System.out.println("-".repeat(60));
-		System.out.println("[고양이] p");
-		System.out.println("[이름] "+ p.getName());
-		c.walk();
+		System.out.println("나는 고양이");
+		System.out.println("고양이 p 이름: "+ p.getName());
+		((Cat) p).play();
+		((Cat) p).eat();
+		((Cat) p).walk();
 		System.out.println("=".repeat(60));
-		System.out.println("[물고기] d");
-		System.out.println("[이름] "+ d.getName());
+		System.out.println("나는 물고기");
+		System.out.println("물고기 p 이름: "+ d.getName());
 		d.walk();
+		d.eat();
+		d.play();
 		System.out.println("-".repeat(60));
-		System.out.println("[물고기] a");
-		System.out.println("[이름] "+ ((Fish) a).getName());
+		System.out.println("물고기");
+		System.out.println("묽고기 a 이름: "+ ((Fish) a).getName());
 		((Fish) a).walk();
+		((Fish) a).eat();
+		((Fish) a).play();
 		System.out.println("=".repeat(60));
-		System.out.println("[거미] e");
+		System.out.println("저는 거미 e에요");
 		((Spider) e).walk();
+		((Spider) e).eat();
 	}
 
 }
