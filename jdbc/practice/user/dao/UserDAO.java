@@ -81,7 +81,6 @@ public class UserDAO {
 			close(stmt, conn);
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return users;
@@ -93,6 +92,7 @@ public class UserDAO {
 		String sql = "insert into users values (?, ?, ?, ?)";
 		try {
 			Connection conn = getConnection();
+			conn.setAutoCommit(false);
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, user.getUserId());
@@ -101,10 +101,70 @@ public class UserDAO {
 			stmt.setString(4, user.getCity());
 			
 			result = stmt.executeUpdate();
+			
+			if(result == 1){
+                conn.commit();
+            }else{
+                conn.rollback();
+            }
+			
 			close(stmt, conn);
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+		
+	}
+	
+	// user 정보가 바뀌었을 경우
+	public int updateUser(String userId, String key, String value) {
+		int result = -1;
+		String sql = "update users set "+ key + "= ? where userId = ?";
+		try {
+			Connection conn = getConnection();
+			conn.setAutoCommit(false);
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, value);
+			stmt.setString(2, userId);
+			result = stmt.executeUpdate();
+			
+			if(result == 1){
+                conn.commit();
+            }else{
+                conn.rollback();
+            }
+			
+			close(stmt, conn);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+		
+	}
+	
+	public int removeUser(String userId) {
+		int result = -1;
+		String sql = "delete from users where userId = ?";
+		try {
+			Connection conn = getConnection();
+			conn.setAutoCommit(false);
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, userId);
+			result = stmt.executeUpdate();
+			
+			if(result == 1){
+                conn.commit();
+            }else{
+                conn.rollback();
+            }
+			
+			close(stmt, conn);
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;
