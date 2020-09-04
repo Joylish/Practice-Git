@@ -8,11 +8,11 @@ javascript 계열에서 대표적인 load package manager는 npm
 
 [maven repository](https://mvnrepository.com/) 에서 **mongo java driver** 검색
 
-![image-20200828131304996](C:\Users\IMPlay\Desktop\TIL\images\mvnrepo1.png)
+![image-20200828131304996](../images/maven/mvnrepo1.png)
 
-![image-20200828131430702](C:\Users\IMPlay\Desktop\TIL\images\mvnrepo2.png)
+![image-20200828131430702](../images/maven/mvnrepo2.png)
 
-![image-20200828131523631](C:\Users\IMPlay\Desktop\TIL\images\mvnrepo3.png)
+![image-20200828131523631](../images/maven/mvnrepo3.png)
 
 
 
@@ -27,15 +27,15 @@ javascript 계열에서 대표적인 load package manager는 npm
 
 이클립스에서 1번 하기
 
-![image-20200828133615763](C:\Users\IMPlay\Desktop\TIL\images\mavenConvert1.png)
+![image-20200828133615763](../images/maven/mavenConvert1.png)
 
-![image-20200828133726792](C:\Users\IMPlay\Desktop\TIL\images\mavenConvert2.png)
+![image-20200828133726792](../images/maven/mavenConvert2.png)
 
-![image-20200828133941166](C:\Users\IMPlay\Desktop\TIL\images\mavenConvert3.png)
+![image-20200828133941166](../images/maven/mavenConvert3.png)
 
 dependency 추가 이후 재시작(ctrl+f5)하면 추가된 dependency가 컴파일이 되면서 maven dependencies에 추가된다.
 
-![image-20200828134423655](C:\Users\IMPlay\Desktop\TIL\images\mvnrepo4.png)
+![image-20200828134423655](../images/maven/mvnrepo4.png)
 
 
 
@@ -43,11 +43,11 @@ dependency 추가 이후 재시작(ctrl+f5)하면 추가된 dependency가 컴파
 
 
 
-![image-20200828134159436](C:\Users\IMPlay\Desktop\TIL\images\newMaven1.png)
+![image-20200828134159436](../images/maven/newMaven1.png)
 
 
 
-![image-20200828134247831](C:\Users\IMPlay\Desktop\TIL\images\newMaven2.png)
+![image-20200828134247831](../images/maven/newMaven2.png)
 
 
 
