@@ -1,0 +1,73 @@
+### Baseline
+
+- Code flow 먼저 정확히 파악하고 이후에 확장 고민
+  - baseline도 충분한 시간을 들여 tuning하면 의외로 높은 점수가 나옴
+  - 다만 baseline만 쓸경우 상위권 진입은 불가
+  - Local에서 하기엔 스케일이 크니 Colab / kaggle가서 하세요
+- Framework 통일시킬 것
+  - Tensorflow? Pytorch? 저는 둘다 되니 팀이 편한 방향으로 잡아서 쓰세요.
+- 학습 속도 향상시키는 방법 고민
+  - Baseline 1 epoch Tesla V100 1개 기준 2,000 초. 너무 느림. 속도 향상시키지 않으면 안됨!
+  - Image grey scale convert with only binary uint8 value (0, 1)
+  - Mixed precision (2 ~ 4 times faster)
+  - 이미지 외각의 불필요한 여백 자르기.
+- hyperparmeter
+  - batch size
+  - learning rate
+  - etc
+- Optimizer
+  - adam -> AdamP, Radam, AdamW with warmstart
+  - 그외 다양한 optimizer 도 시도해볼 수 있으면 좋음
+- loss
+  - loss도 다양함. 이것저것 찾아볼 것. loss 함수 설정도 성능에 영향을 크게 미침.
+- Schedular
+  - Plateau
+  - Consine Annealing
+  - Cycle
+- data augumentation
+  - 적용 아직 의문이지만 시도해볼 수 있다면 반드시 해봐야함
+  - 적용에 의문을 가지는 이유는 train set과 test set의 이미지 형태가 너무 똑같음
+- Undersampling
+  - 하드웨어 스펙 부족으로 다양한 테스트를 하기에 시간이 충분치 않다면 분자 개수마다 이미지 100장씩 뽑아내서 예로 이미지 10,000개 정도를 sampling하여서 가장 좋은 성능의 hyperparmeter / optimizer / augmentation 등등을 찾아내기. 다만 데이터셋 분포에 따라서 적합한 parameter는 달라지므로 참고용으로만 사용할 것. 10,000개에서 적합한 조합이 900,000장에서는 퍼포먼스 저하가 있을 수 있음.
+- EDA (Exploratory Data Analysis)
+  - 분자 특성치 혹은 분자 갯수에 따라 세분화 하여 분석
+  - 중복 데이터 제거
+  - 지나치게 비슷한 데이터 역시 제거
+- Ensemble
+  - 실력 70% 운 30%
+- KFold 검증
+  - 정밀한 validation score 획득 가능 다만 시간관계상 사용은 힘듬.
+  - 여러 fold로 훈련시킨 모델을 제출하여 testset과의 적합성을 테스트 해볼 수 있음
+  - ★ 테스트셋에 오버피팅 시켜야함
+    테스트셋 분포도에 가장 유사한 fold를 찾아내면 좋음.
+  - 하지만 이런 대회에선 시간이 부족하므로 그냥 하나의 fold써서 다양한 실험으로 validation score높이는 것을 추천.
+- Dataset
+  - Public 20,000 (주어짐)
+  - Private 70,000 (대회 마지막 주에 공개)
+- Noisy
+  - 사실 필요한지는 의문. Noisy data가 없어보임.
+  - 만약 존재한다면 제거하는 technique 공부해서 적용
+  - 예로 noisy robust model or noisy label elimination 등등 여러종류가 있음
+- Training Technique
+  - Curriculum learning을 응용 버젼 (원래는 classification용)
+    - 각 분자 갯수별 집단을 훈련시킨 후 가장 잘 배우는 것부터 차근차근 training
+    - 분자갯수 5개 → 분자갯수 5개 10개 → 분자갯수 5개 10개 15개 → train셋 전부셋 훈련
+- Model
+  - inception v3 + 1 layer GRU 가 현재 적용되어 있음
+  - 어떤 모델을 사용하던 결과적으로 데이터 분포를 학습
+  - 데이터셋에 최적화된 모델을 찾아나가는 것은 중요.
+  - EfficientNet / GPT는 많은 대회에서 애용되는 강력한 pretrained model
+  - Custom model에는 다양한 종류가 있음. Kaggle의 다양한 레퍼런스를 참조하면 좋음.
+- Hardware
+  - 이런 대회는 결국 하드웨어 싸움. 좋은 하드웨어를 가진 팀이 절대적 우위.
+  - TPU가 Tesla V100보다 좋다고 하는데 과거 경험상 그런 특별한 우위를 느껴본적은 없음. 다만 톡방의 잘하는 사람들이 TPU가 좋다고 하니 이유가 있을 것임. 제대로 다루는 방법을 공부하여 적용시키면 잘 될듯.
+  - Colab / Kaggle 에서 제공해주는 무료 K80 / P100을 최대한 활용
+  - 제대로된 training을 시키고 싶을 경우 구글 클라우드 (GCP)에 가입하여 free tier 및 300$ 크레딧을 받아서 Tesla V100나 TPU빌려서 사용할 것. 해당 크레딧이면 이번 대회 끝날때까지는 적절히 사용하기에 충분.
+- Testset
+  - Public 데이터에 라벨링 매기면서 노가다를 뛰는 것은 결과적으로는 private데이터셋의 존재때문에 노력을 들인 시간이 쓸모가 없게될 수 있음. 차라리 train set으로 더 많은 실험으로 점수를 올리는 방법을 추천
+  - Overfitting 을 시켜야함. 이는 무수히 많은 제출만이 살길. 다만 제출하는 모델은 validation score가 충분히 우수한 상태에서 해야함.
+- ETC
+  - 직접 해본건 아니고 같이 경쟁했던 다른 팀이 사용했던 방법 중에 잘 예측을 못하는 데이터셋을 제거하는 팀이 있었음. 성능을 향상시켰다고 들었음.
+- Teamwork
+  - EDA / Baseline파악까지는 다같이 해야함
+  - 이후는 각자 튜닝할 부분을 맡아서 역할을 분배
